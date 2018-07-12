@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.PageInfo;
 import com.zlwon.constant.IntegrationDeatilCode;
 import com.zlwon.constant.StatusCode;
+import com.zlwon.dto.pc.dealerdQuotation.DealerdQuotationEmailDto;
 import com.zlwon.dto.pc.dealerdQuotation.InsertDealerdQuotationDto;
 import com.zlwon.dto.pc.dealerdQuotation.QueryMyDealerdQuotationPageDto;
 import com.zlwon.dto.pc.dealerdQuotation.UpdateDealerdQuotationDto;
@@ -395,5 +396,16 @@ public class DealerdQuotationController extends BaseController {
 		}
 		
 		return ResultData.ok();
+	}
+	
+	/**
+	 * 我要询价，发送邮件
+	 * @return
+	 */
+	public  ResultData   sendEmail(DealerdQuotationEmailDto  dealerdQuotationEmailDto){
+		String content = "<div>" 
+				+ "</div>";
+		mailService.sendHtmlMail("yg.chen@zlwon.com", "关于"+dealerdQuotationEmailDto.getName()+"的询价", content);
+		return   ResultData.ok();
 	}
 }
